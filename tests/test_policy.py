@@ -21,7 +21,10 @@ class PolicyChecks(unittest.TestCase):
     def test_task3_packing_and_memory(self):
         with self.subTest(rule="waves"):
             self.assertLessEqual(self.result["waves"], 2, "12 items must finish within two toy waves")
-        with self.subTest(rule="memory"):
+        with self.subTest(rule="first-wave"):
+            self.assertGreaterEqual(self.result["admitted_first_wave"], 8,
+                                    "Admit at least 8 of 12 items in first toy wave")
+        with self.subTest(rule="memory"): 
             self.assertLessEqual(self.result["per_replica_memory_mib"], 160,
                                  "32 base + 32 per simultaneous item must fit 160 MiB")
 

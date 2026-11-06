@@ -8,7 +8,7 @@ Install Git and eligible local Docker runtime; start Docker and pre-pull `python
 Create branch `fix/scaling-policy`. Edit only `policy.json` and `scaling-notes.md`; planner, Dockerfile and tests are trusted and must stay unchanged. Exactly three planted policy faults. Baseline intentionally fails all three task checks. No hidden app/port defect.
 
 ## Fixed scenario and derivable rules
-12 identical work items arrive together. Each holds one simultaneous slot for one abstract wave. Every replica has toy memory budget 160 MiB: 32 base + 32 per simultaneous item. Each replica reserves a pool of 4 downstream connections; total budget 8. Service idle overnight; cold-start delay accepted, so reserve zero idle slots. Finish batch in at most two toy waves. These are assumed constants, not measured RAM/pools or actual Cloud Run behavior.
+12 identical work items arrive together. Each holds one simultaneous slot for one abstract wave. Every replica has toy memory budget 160 MiB: 32 base + 32 per simultaneous item. Each replica reserves a pool of 4 downstream connections; total budget 8. Service idle overnight; cold-start delay accepted, so reserve zero idle slots. Admit at least 8 items in the first wave and finish batch in at most two toy waves. These are assumed constants, not measured RAM/pools or actual Cloud Run behavior.
 
 Policy keys: integer `min_instances >= 0`, positive integer `max_instances` and `concurrency`, min <= max. Concurrency means maximum simultaneous work per replica, **not requests per second**.
 
